@@ -1,4 +1,4 @@
-package com.example.spring.training;
+package com.example.spring.training.helloworld;
 
 public class HelloWorldBean {
 	private String message;
