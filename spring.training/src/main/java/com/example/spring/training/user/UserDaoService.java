@@ -22,15 +22,16 @@ public class UserDaoService {
 	}
 
 	public User findById(int id) {
-		if (users.get(id) != null) {
-			return users.get(id);
+		for(User user : users) {
+			if(user.getId() == id) {
+				return user;
+			}
 		}
 		return null;
 	}
 
 	public User save(User user) {
 		if (findById(user.getId()) == null) {
-			user.setId(++userCount);
 			users.add(user);
 			return user;
 		}
@@ -41,7 +42,11 @@ public class UserDaoService {
 		if (findById(id) == null) {
 			return null;
 		}
-		users.remove(id);
+		for(User user : users) {
+			if(user.getId() == id) {
+				users.remove(user);
+			}
+		}
 		return users;
 	}
 
