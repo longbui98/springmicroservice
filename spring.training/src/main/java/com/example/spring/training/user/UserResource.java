@@ -40,12 +40,16 @@ public class UserResource {
 
 	// Retrieve one User
 	@GetMapping(path="/user/{id}")
-	public User getUserById(@PathVariable int id) {
-		return service.findById(id);
+	public User getUserById(@PathVariable int id) throws UserNotFoundException {
+		User user = service.findById(id);
+		if(user == null) {
+			throw new UserNotFoundException("id: " + id);
+		}
+		return user;
 	}
 	
 	//Delete user
-	@DeleteMapping(path="users/{id}")
+	@DeleteMapping(path="user/{id}")
 	public List<User> deleteUserById(@PathVariable int id){
 		return service.delete(id);
 	}
